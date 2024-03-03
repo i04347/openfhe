@@ -73,7 +73,7 @@ option( GIT_SUBMOD_AUTO "Submodules auto-update"                                
 option( WITH_BE2 "Include MATHBACKEND 2 in build by setting WITH_BE2 to ON"          OFF )
 option( WITH_BE4 "Include MATHBACKEND 4 in build by setting WITH_BE4 to ON"          OFF )
 option( WITH_NTL "Include MATHBACKEND 6 and NTL in build by setting WITH_NTL to ON"  OFF )
-option( WITH_TCM "Activate tcmalloc by setting WITH_TCM to ON"                       OFF )
+option( WITH_TCM "Activate tcmalloc by setting WITH_TCM to ON"                       ON )
 option( WITH_NATIVEOPT "Use machine-specific optimizations"                          OFF )
 option( WITH_COVTEST "Turn on to enable coverage testing"                            OFF )
 option( WITH_NOISE_DEBUG "Use only when running lattice estimator; not for production" OFF )

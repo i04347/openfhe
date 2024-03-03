@@ -34,6 +34,10 @@
 #include "math/binaryuniformgenerator.h"
 #include "math/discreteuniformgenerator.h"
 #include "math/ternaryuniformgenerator.h"
+#include <cereal/types/memory.hpp>
+#include <cereal/types/vector.hpp>
+#include <cereal/archives/binary.hpp>
+#include <fstream>
 
 namespace lbcrypto {
 // the main rounding operation used in ModSwitch (as described in Section 3 of
@@ -362,10 +366,21 @@ LWESwitchingKey LWEEncryptionScheme::KeySwitchGen(const std::shared_ptr<LWECrypt
             vector1A.push_back(std::move(vector2A));
             vector1B.push_back(std::move(vector2B));
         }
-        resultVecA[i] = std::move(vector1A);
-        resultVecB[i] = std::move(vector1B);
+        //resultVecA[i] = std::move(vector1A);
+        {
+        std::ofstream ofs{"key-switching.key1A", std::ios::binary};
+        cereal::BinaryOutputArchive archive(ofs);
+        archive(CEREAL_NVP(vector1A));
+        }
+        //resultVecB[i] = std::move(vector1B);
+        {
+        std::ofstream ofs{"key-switching.key1B", std::ios::binary};
+        cereal::BinaryOutputArchive archive(ofs);
+        archive(CEREAL_NVP(vector1B));
+        }
     }
-    return std::make_shared<LWESwitchingKeyImpl>(LWESwitchingKeyImpl(std::move(resultVecA), std::move(resultVecB)));
+    //return std::make_shared<LWESwitchingKeyImpl>(LWESwitchingKeyImpl(std::move(resultVecA), std::move(resultVecB)));
+    return nullptr;
 }
 
 // the key switching operation as described in Section 3 of
